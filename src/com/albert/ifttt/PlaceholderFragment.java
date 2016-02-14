@@ -20,13 +20,12 @@ public class PlaceholderFragment extends Fragment {
 	private Button stopButton = null;
 	private Intent intent = null;
 
-	public PlaceholderFragment() {
-		
-	}
+	 
 
 	public PlaceholderFragment(Intent intent) {
 		// TODO Auto-generated constructor stub
 		this.intent = intent;
+//		getActivity().startService(intent);
 	}
 
 	@Override
