@@ -35,11 +35,12 @@
         <receiver android:name="com.albert.ifttt.service.BootBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
 
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.albert.ifttt.broadcast.mainbroadcast" >
+        <receiver android:name="com.albert.ifttt.broadcast.mainbroadcastReceiver" >
             <intent-filter android:priority="1000" >
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                 <action android:name="android.intent.action.USER_PRESENT" />

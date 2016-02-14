@@ -12,5 +12,7 @@ public class MyUsers {
 				.parse("content://com.albert.ifttt.contentprovider.MainContentProvider");
 		// 表数据列
 		public static final String USER_NAME = "USER_NAME";
+		public static final String USER_STATE = "USER_STATE";
+		public static final String USER_TIME = "USER_TIME";
 	}
 }
