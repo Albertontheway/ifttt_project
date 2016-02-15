@@ -15,10 +15,10 @@ class DatabaseHelper extends SQLiteOpenHelper {
 		// 创建用于存储数据的表
 		 
  		
-		db.execSQL("Create table "
+		db.execSQL("create table "
 				+ MainContentProvider.TABLE_NAME
-				+ "( _id INTEGER PRIMARY KEY AUTOINCREMENT, USER_NAME TEXT, USER_STATE TEXT , USER_TIME DATETIME DEFAULT CURRENT_TIMESTAMP );");
-//	db.execSQL("alter session set time_zone = \'+08:00\';");
+				+ "( _id INTEGER PRIMARY KEY AUTOINCREMENT, USER_NAME TEXT, USER_STATE TEXT , USER_TIME TEXT);");
+//	db.execSQL("ALTER SESSION SET TIME_ZONE='UTC';");
 	}
 
 	// , TIME DATETIME DEFAULT CURRENT_TIMESTAMP
