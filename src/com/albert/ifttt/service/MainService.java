@@ -1,7 +1,13 @@
 package com.albert.ifttt.service;
 
+import com.albert.ifttt.MainActivity;
+import com.albert.ifttt.broadcast.mainbroadcastReceiver;
+import com.albert.ifttt.contentprovider.database_utils;
+
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
@@ -10,24 +16,22 @@ public class MainService extends Service {
 	int mStartMode; // indicates how to behave if the service is killed
 	IBinder mBinder; // interface for clients that bind
 	boolean mAllowRebind; // indicates whether onRebind should be used
+	private BroadcastReceiver mainbroadcastReceiver;
+	database_utils data_util;
 
 	@Override
 	public void onCreate() {
 
 		// The service is being created
 		Log.e("MainService", " MainService onCreate");
-//		new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				int i;
-//				for (i = 0; i <= 50; i++) {
-//					Toast.makeText(getApplicationContext(), "i = " + i,
-//							Toast.LENGTH_LONG).show();
-//
-//				}
-//			}
-//		}).start();
+		data_util = new database_utils(MainService.this);
+		mainbroadcastReceiver = new mainbroadcastReceiver(data_util);
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Intent.ACTION_SCREEN_ON);
+		filter.addAction(Intent.ACTION_SCREEN_OFF);
+		filter.addAction(Intent.ACTION_USER_PRESENT);
+		registerReceiver(mainbroadcastReceiver, filter);
+
 	}
 
 	@Override

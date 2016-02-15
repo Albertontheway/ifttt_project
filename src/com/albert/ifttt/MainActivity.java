@@ -31,22 +31,23 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		data_util = new database_utils(MainActivity.this);
+//		data_util = new database_utils(MainActivity.this);
 		intent = new Intent(MainActivity.this, MainService.class);
-		mainbroadcastReceiver = new mainbroadcastReceiver();
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(Intent.ACTION_SCREEN_ON);
-		filter.addAction(Intent.ACTION_SCREEN_OFF);
-		filter.addAction(Intent.ACTION_USER_PRESENT);
-		registerReceiver(mainbroadcastReceiver, filter);
-
+//		mainbroadcastReceiver = new mainbroadcastReceiver(data_util);
+//		IntentFilter filter = new IntentFilter();
+//		filter.addAction(Intent.ACTION_SCREEN_ON);
+//		filter.addAction(Intent.ACTION_SCREEN_OFF);
+////		filter.addAction(Intent.ACTION_USER_PRESENT);
+//		registerReceiver(mainbroadcastReceiver, filter);
+		 
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		this.startService(intent);
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment(intent))
 					.commit();
 		}
-		data_util.insertRecord("MyUser");
-		data_util.displayRecords();
+	
 
 	}
 
