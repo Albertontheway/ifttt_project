@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import com.albert.ifttt.R;
 import com.albert.ifttt.contentprovider.MyUsers;
 import com.albert.ifttt.contentprovider.database_utils;
+import com.albert.ifttt.jni.mainjni;
 import com.albert.ifttt.service.MainService;
 
 import android.app.Activity;
@@ -26,13 +27,15 @@ public class MainActivity extends Activity {
 	private Intent intent = null;
 	private BroadcastReceiver mainbroadcastReceiver;
 	database_utils data_util;
+	mainjni jni_method;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-//		data_util = new database_utils(MainActivity.this);
+		
 		intent = new Intent(MainActivity.this, MainService.class);
+	
 //		mainbroadcastReceiver = new mainbroadcastReceiver(data_util);
 //		IntentFilter filter = new IntentFilter();
 //		filter.addAction(Intent.ACTION_SCREEN_ON);
@@ -40,7 +43,7 @@ public class MainActivity extends Activity {
 ////		filter.addAction(Intent.ACTION_USER_PRESENT);
 //		registerReceiver(mainbroadcastReceiver, filter);
 		 
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		 
 		this.startService(intent);
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
@@ -50,7 +53,13 @@ public class MainActivity extends Activity {
 	
 
 	}
-
+	
+	@Override
+	public void onDestroy ()  {
+		intent = new Intent(MainActivity.this, MainService.class);
+		 
+		this.startService(intent);
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

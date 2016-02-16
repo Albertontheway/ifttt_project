@@ -25,13 +25,10 @@ public class mainbroadcastReceiver extends BroadcastReceiver {
 
 	}
 	public mainbroadcastReceiver() {
-		
-		
-		
 
 	}
 	public void onReceive(Context context, Intent intent) {
-	
+		Log.e("onReceive", " onReceive");
 		if (intent.getAction().equals(SMS_RECEIVED)) {
 			if (data_util == null) {
 				Intent startServiceIntent = new Intent(context, MainService.class);
@@ -46,7 +43,7 @@ public class mainbroadcastReceiver extends BroadcastReceiver {
 		}
 
 		if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
-
+			Log.e("onReceive", " ACTION_SCREEN_ON");
 			data_util.insertRecord("ACTION_SCREEN_ON");
 			data_util.displayRecords();
 
@@ -55,6 +52,7 @@ public class mainbroadcastReceiver extends BroadcastReceiver {
 			data_util.displayRecords();
 
 		} else if (Intent.ACTION_USER_PRESENT.equals(intent.getAction())) {
+			Log.e("onReceive", " ACTION_USER_PRESENT");
 			if (data_util == null) {
 				Intent startServiceIntent = new Intent(context, MainService.class);
 				startServiceIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

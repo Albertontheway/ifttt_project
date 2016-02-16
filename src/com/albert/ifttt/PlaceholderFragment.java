@@ -1,5 +1,6 @@
 package com.albert.ifttt;
 
+import com.albert.ifttt.jni.mainjni;
 import com.albert.ifttt.service.MainService;
 
 import android.app.Fragment;
@@ -19,13 +20,20 @@ public class PlaceholderFragment extends Fragment {
 	private Button startButton = null;
 	private Button stopButton = null;
 	private Intent intent = null;
-
-	 
+	mainjni jni_method;
+	int version = 0;
 
 	public PlaceholderFragment(Intent intent) {
 		// TODO Auto-generated constructor stub
 		this.intent = intent;
-//		getActivity().startService(intent);
+
+		try {
+			version = Integer.valueOf(android.os.Build.VERSION.SDK);
+		} catch (NumberFormatException e) {
+		}
+		jni_method = new mainjni();
+
+		// getActivity().startService(intent);
 	}
 
 	@Override
@@ -40,6 +48,7 @@ public class PlaceholderFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				getActivity().startService(intent);
+				jni_method.forkthread("aaa", version);
 			}
 		});
 

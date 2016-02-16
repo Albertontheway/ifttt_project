@@ -38,7 +38,10 @@ public class MainService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// The service is starting, due to a call to startService()
 		Log.e("MainService", " MainService onStartCommand");
-		return mStartMode;
+		flags = START_REDELIVER_INTENT;//如果服务被异常kill掉，系统会自动重启该服务
+		
+		return super.onStartCommand(intent, flags, Service.START_NOT_STICKY);
+//		return super.onStartCommand(intent, flags, startId);
 	}
 
 	@Override
